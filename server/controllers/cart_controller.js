@@ -20,13 +20,11 @@ module.exports = {
         const id = parseInt(req.query.id);
         const { cart } = req.session.user;
         const index = cart.findIndex(obj => obj.id === id);
-        console.log('before', req.session.user);
         if (index > -1) {
             req.session.user.total -= cart[index].price;
             req.session.user.cart = req.session.user.cart.slice().splice(index, 1);
             
         }
-        console.log('after', req.session.user);
         res.status(200).json(req.session.user);
     },
     checkout : (req, res) => {
